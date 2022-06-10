@@ -5,18 +5,19 @@ const galleryContainer = document.querySelector(".gallery");
 
 function galleryCreator(pics) {
   return pics
-    .map(({ preview, original, description }) => {
-      return `<div class="gallery__item">
+    .map(
+      ({ preview, original, description }) =>
+        `<div class="gallery__item">
     <a class="gallery__link" href="${original}">
       <img
         class="gallery__image"
         src="${preview}"
         data-source="${original}"
     alt="${description}"
-      />
+        />
     </a>
-  </div>`;
-    })
+  </div>`
+    )
     .join("");
 }
 
@@ -28,6 +29,7 @@ galleryContainer.addEventListener("click", onClick);
 
 function onClick(e) {
   e.preventDefault();
+  if (e.target.classList.contains("gallery")) return;
   instance = basicLightbox.create(`<img src="${e.target.dataset.source}">`);
   instance.show();
   closeModal();
